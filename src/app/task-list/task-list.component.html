@@ -1,0 +1,13 @@
+ 
+<h2>Task List</h2>
+<div *ngFor="let task of tasks">
+  <div class="task">
+    <h3>{{ task.title }}</h3>
+    <p>{{ task.description }}</p>
+    <p>Due Date: {{ task.dueDate | date }}</p>
+    <p>Priority: {{ task.priority }}</p>
+    <p>Status: {{ task.status }}</p>
+    <button (click)="editTask(task._id)">Edit</button>
+    <button (click)="deleteTask(task._id)">Delete</button>
+  </div>
+</div>
