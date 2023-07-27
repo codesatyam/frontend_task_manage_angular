@@ -1,5 +1,85 @@
-div {
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
+/* Add space from all sides */
+.tasks-det{
+margin: 20px;
+}
+div[ngIf="task"] {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f8f8f8;
+}
+
+/* Style the form elements */
+form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 16px;
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff; /* Add background color for inputs */
+}
+
+select {
+  appearance: none;
+  background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="6" fill="%23333" viewBox="0 0 1792 1792"><path d="M1664 480q0 26-19 45l-703 703q-19 19-45 19t-45-19l-703-703q-19-19-19-45t19-45q19-19 45-19t45 19l658 658 658-658q19-19 45-19t45 19q19 19 19 45z"></path></svg>');
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+button {
   
+  padding: 6px 12px; /* Reduce button size */
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+}
+
+button[type="submit"] {
+  margin-top: 33px;
+  background-color: #007bff;
+  width: 200px;
+  height: 40px;
+}
+
+button[type="button"] {
+  background-color: #dc3545;
+}
+
+/* Style the history log */
+h3 {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.mx-4 {
+  margin-right: 16px;
+}
+
+.history-log{
+background-color: #6b96c5;
+padding: 5px;
+}

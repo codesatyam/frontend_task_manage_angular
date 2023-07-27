@@ -1,13 +1,12 @@
- 
 <h2>Task List</h2>
-<div *ngFor="let task of tasks">
+<div *ngFor="let task of tasks" class="task-item">
   <div class="task">
-    <h3>{{ task.title }}</h3>
-    <p>{{ task.description }}</p>
-    <p>Due Date: {{ task.dueDate | date }}</p>
-    <p>Priority: {{ task.priority }}</p>
-    <p>Status: {{ task.status }}</p>
-    <button (click)="editTask(task._id)">Edit</button>
-    <button (click)="deleteTask(task._id)">Delete</button>
+    <h3><strong>Title:</strong> {{ task.title }}</h3>
+    <p class="task-description"><strong>Desc:</strong> {{ task.description }}</p>
+    <p class="task-due-date"><strong>Due Date:</strong> {{ task.dueDate | date }}</p>
+    <p class="task-priority"><strong>Priority:</strong> {{ task.priority }}</p>
+    <p class="task-status"><strong>Status:</strong> {{ task.status }}</p>
+    <button class="edit-btn" (click)="editTask(task._id)">Edit</button>
+    <button class="delete-btn" (click)="deleteTask(task._id)">Delete</button>
   </div>
 </div>

@@ -8,6 +8,10 @@ import { AppComponent } from './app.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import { TaskDetailsComponent } from './task-details/task-details.component';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
+import { taskReducer } from './store/task.reduces';
+import { TaskEffects } from './store/task.effects';
 
 const appRoutes: Routes = [
   { path: '', component: TaskListComponent },
@@ -23,6 +27,8 @@ const appRoutes: Routes = [
     TaskDetailsComponent
   ],
   imports: [
+    StoreModule.forRoot({ tasks: taskReducer }),
+    EffectsModule.forRoot([TaskEffects]),
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(appRoutes),

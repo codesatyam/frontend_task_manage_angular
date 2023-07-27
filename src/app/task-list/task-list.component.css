@@ -1,6 +1,75 @@
+/* Style the container */
+.task-list-container {
+  margin: 20px;
+  padding: 20px;
+  background-color: #f8f8f8;
+}
+
+/* Style the heading */
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 16px;
+}
+
+/* Style each task item */
+.task-item {
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
 .task {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin: 10px 0;
-  }
-  
+  margin-bottom: 8px;
+}
+
+h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+p {
+  margin-bottom: 4px;
+}
+
+/* Style the <p> tags with background colors */
+.task-description {
+  background-color: #f2f2f2; /* Light gray background for description */
+  padding: 8px;
+}
+
+.task-due-date {
+  background-color: #d3e0fc; /* Light blue background for due date */
+  padding: 8px;
+}
+
+.task-priority {
+  background-color: #dff0d8; /* Light green background for priority */
+  padding: 8px;
+}
+
+.task-status {
+  background-color: #fce5cd; /* Light orange background for status */
+  padding: 8px;
+}
+
+/* Style the edit and delete buttons */
+button.edit-btn,
+button.delete-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button.edit-btn {
+  background-color: #007bff; /* Edit button color */
+  margin-right: 8px;
+}
+
+button.delete-btn {
+  background-color: #dc3545; /* Delete button color */
+}
