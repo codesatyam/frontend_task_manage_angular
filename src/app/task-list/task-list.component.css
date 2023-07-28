@@ -14,19 +14,19 @@ h2 {
 
 /* Style each task item */
 .task-item {
-  margin-bottom: 20px;
-  padding: 16px;
+  margin: 5px;
+  padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
 }
 
 .task {
-  margin-bottom: 8px;
+  margin-bottom: 0px;
 }
 
 h3 {
   font-size: 20px;
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
 }
 
 p {
@@ -73,3 +73,72 @@ button.edit-btn {
 button.delete-btn {
   background-color: #dc3545; /* Delete button color */
 }
+/* Styles for the sorting buttons */
+.sort-button {
+  margin: 0 5px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.sort-button.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.sort-button:not(.active):hover {
+  background-color: #f8f9fa;
+}
+
+.sort-button .arrow {
+  margin-left: 5px;
+  transition: transform 0.2s ease; /* Add a smooth transition for the arrow rotation */
+}
+
+.sort-button.up .arrow {
+  transform: rotate(-180deg); /* Rotate the arrow 180 degrees for the upward direction */
+}
+
+/* Styles for the task list section */
+.task-list {
+  margin-top: 20px;
+}
+
+.task-item {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.task-item h3 {
+  margin: 0;
+}
+
+.task-item .task-description {
+  margin: 5px 0;
+}
+
+.task-item .task-due-date,
+.task-item .task-priority,
+.task-item .task-status {
+  margin: 2px 0;
+}
+
+.edit-btn,
+.delete-btn,.csv-btn {
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 5px 10px;
+  margin-right: 5px;
+}
+
+.edit-btn:hover,
+.delete-btn:hover {
+  background-color: #0056b3;
+}
+

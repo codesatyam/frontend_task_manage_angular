@@ -1,21 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { TaskState } from './task.store';
+import { TaskState, taskAdapter } from './task.reduces';
 
-const getTaskFeatureState = createFeatureSelector<TaskState>('tasks');
+export const selectTaskState = createFeatureSelector<TaskState>('tasks');
 
-export const getTasks = createSelector(
-  getTaskFeatureState,
-  (state) => state.tasks
-);
+const { selectAll } = taskAdapter.getSelectors();
 
-export const getLoading = createSelector(
-  getTaskFeatureState,
-  (state) => state.loading
-);
-
-export const getError = createSelector(
-  getTaskFeatureState,
-  (state) => state.error
-);
-
-// Define other selectors for accessing specific task, selected task, etc.
+export const selectAllTasks = createSelector(selectTaskState, selectAll);

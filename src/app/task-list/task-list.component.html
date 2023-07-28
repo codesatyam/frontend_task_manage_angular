@@ -1,12 +1,38 @@
-<h2>Task List</h2>
-<div *ngFor="let task of tasks" class="task-item">
-  <div class="task">
-    <h3><strong>Title:</strong> {{ task.title }}</h3>
-    <p class="task-description"><strong>Desc:</strong> {{ task.description }}</p>
-    <p class="task-due-date"><strong>Due Date:</strong> {{ task.dueDate | date }}</p>
-    <p class="task-priority"><strong>Priority:</strong> {{ task.priority }}</p>
-    <p class="task-status"><strong>Status:</strong> {{ task.status }}</p>
-    <button class="edit-btn" (click)="editTask(task._id)">Edit</button>
-    <button class="delete-btn" (click)="deleteTask(task._id)">Delete</button>
+<div class="d-flex justify-content-center p-1">
+  <h2>Task List</h2>
+</div>
+
+<div class="d-flex justify-content-center">
+  <button class="sort-button" [ngClass]="{'active': sortByDueDateAscending}" (click)="sortByDueDate()">
+    Sort by Due Date
+    <span *ngIf="sortByDueDateAscending" class="arrow">&#9650;</span>
+    <span *ngIf="!sortByDueDateAscending" class="arrow">&#9660;</span>
+  </button>
+  
+  <button class="sort-button" [ngClass]="{'active': sortByPriorityAscending}" (click)="sortByPriority()">
+    Sort by Priority
+    <span *ngIf="sortByPriorityAscending" class="arrow">&#9650;</span>
+    <span *ngIf="!sortByPriorityAscending" class="arrow">&#9660;</span>
+  </button>
+
+  <button class="sort-button" [ngClass]="{'active': sortByStatusAscending}" (click)="sortByStatus()">
+    Sort by Status
+    <span *ngIf="sortByStatusAscending" class="arrow">&#9650;</span>
+    <span *ngIf="!sortByStatusAscending" class="arrow">&#9660;</span>
+  </button>
+  <button class="csv-btn" (click)="exportToCSV()">Export to CSV</button>
+</div>
+
+<div class="task-list">
+  <div *ngFor="let task of tasks" class="task-item">
+    <div class="task">
+      <h3><strong>Title:</strong> {{ task.title }}</h3>
+      <p class="task-description"><strong>Desc:</strong> {{ task.description }}</p>
+      <p class="task-due-date"><strong>Due Date:</strong> {{ task.dueDate | date }}</p>
+      <p class="task-priority"><strong>Priority:</strong> {{ task.priority }}</p>
+      <p class="task-status"><strong>Status:</strong> {{ task.status }}</p>
+      <button class="edit-btn" (click)="editTask(task._id)">History & Edit</button>
+      <button class="delete-btn" (click)="deleteTask(task._id)">Delete</button>
+    </div>
   </div>
 </div>

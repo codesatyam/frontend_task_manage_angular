@@ -1,5 +1,4 @@
 <div *ngIf="task" class="tasks-det">
-  <h2>{{ task.title }}</h2>
   <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
     <div>
       <label for="title">Title:</label>
@@ -29,54 +28,32 @@
         <option value="completed">Completed</option>
       </select>
     </div>
-    <button type="submit">Save Changes</button>
-    <button type="button" (click)="resetForm()">Reset Form</button>
+    <div class="button-container">
+      <button type="submit">Save Changes</button>
+      <button type="button" (click)="resetForm()">Reset Form</button>
+    </div>    
   </form>
- <h3>History Log</h3>
-  <ul   >
-    <li *ngFor="let historyEntry of task.historyLog">
-      <p>Time: {{ historyEntry.timestamp | date }}</p>
-      <div class="d-flex  history-log ">
-        <span class="mx-4">
-          <strong>Title:</strong> {{ historyEntry.changes?.title }}  
-        </span>
-        <span class="mx-4">
-          <strong>desc:</strong> {{ historyEntry.changes?.description }}  
-        </span>
-        <span class="mx-4">
-          <strong>Due Date:</strong> {{ historyEntry.changes?.dueDate }}  
-        </span>
-        <span class="mx-4">
-          <strong>Priority:</strong> {{ historyEntry.changes?.priority }}  
-        </span>
-        <span class="mx-4">
-          <strong>Status:</strong> {{ historyEntry.changes?.status }}  
-        </span>
-      </div>
-      
-    </li>
-  </ul>  
-  <!-- <h3>History Log</h3>
+  <h3>History Log</h3>
   <ul>
     <li *ngFor="let historyEntry of task.historyLog">
-      <p>Timestamp: {{ historyEntry.timestamp }}</p>
-      <ul>
-        <li *ngIf="historyEntry.changes.title">
-          <span>Title: {{ historyEntry.changes.title }}</span>
-        </li>
-        <li *ngIf="historyEntry.changes.description">
-          <span>Description: {{ historyEntry.changes.description }}</span>
-        </li>
-        <li *ngIf="historyEntry.changes.dueDate">
-          <span>Due Date: {{ historyEntry.changes.dueDate }}</span>
-        </li>
-        <li *ngIf="historyEntry.changes.priority">
-          <span>Priority: {{ historyEntry.changes.priority }}</span>
-        </li>
-        <li *ngIf="historyEntry.changes.status">
-          <span>Status: {{ historyEntry.changes.status }}</span>
-        </li>
-      </ul>
+      <p>Time: {{ historyEntry.timestamp | date }}</p>
+      <div class="d-flex history-log">
+        <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'title')}">
+          <strong>Title:</strong> {{ getPropertyValue(historyEntry.changes, 'title', task.title) }}
+        </span>
+        <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'description')}">
+          <strong>desc:</strong> {{ getPropertyValue(historyEntry.changes, 'description', task.description) }}
+        </span>
+        <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'dueDate')}">
+          <strong>Due Date:</strong> {{ getPropertyValue(historyEntry.changes, 'dueDate', task.dueDate) }}
+        </span>
+        <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'priority')}">
+          <strong>Priority:</strong> {{ getPropertyValue(historyEntry.changes, 'priority', task.priority) }}
+        </span>
+        <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'status')}">
+          <strong>Status:</strong> {{ getPropertyValue(historyEntry.changes, 'status', task.status) }}
+        </span>
+      </div>
     </li>
-  </ul> -->
+  </ul>
 </div>

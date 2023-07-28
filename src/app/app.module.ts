@@ -3,6 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Add these imports
 import { RouterModule, Routes } from '@angular/router';
+// import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { saveAs } from 'file-saver'; // Import FileSaver
+import * as Papa from 'papaparse'; // Import papaparse
 
 import { AppComponent } from './app.component';
 import { TaskListComponent } from './task-list/task-list.component';
@@ -34,6 +38,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     FormsModule, // Add this line
     ReactiveFormsModule, // Add this line
+    // BrowserAnimationsModule, MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
