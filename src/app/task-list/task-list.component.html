@@ -1,26 +1,33 @@
+<div class="tasks-list"> 
+  <div> 
 <div class="d-flex justify-content-center p-1">
   <h2>Task List</h2>
 </div>
 
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center list-btn">
   <button class="sort-button" [ngClass]="{'active': sortByDueDateAscending}" (click)="sortByDueDate()">
-    Sort by Due Date
+    Due Date
     <span *ngIf="sortByDueDateAscending" class="arrow">&#9650;</span>
     <span *ngIf="!sortByDueDateAscending" class="arrow">&#9660;</span>
   </button>
   
   <button class="sort-button" [ngClass]="{'active': sortByPriorityAscending}" (click)="sortByPriority()">
-    Sort by Priority
+    Priority
     <span *ngIf="sortByPriorityAscending" class="arrow">&#9650;</span>
     <span *ngIf="!sortByPriorityAscending" class="arrow">&#9660;</span>
   </button>
 
   <button class="sort-button" [ngClass]="{'active': sortByStatusAscending}" (click)="sortByStatus()">
-    Sort by Status
+    Status
     <span *ngIf="sortByStatusAscending" class="arrow">&#9650;</span>
     <span *ngIf="!sortByStatusAscending" class="arrow">&#9660;</span>
   </button>
-  <button class="csv-btn" (click)="exportToCSV()">Export to CSV</button>
+  <button class="csv-btn " (click)="exportToCSV()">
+    <i class="fas fa-file-csv"></i> Export to CSV
+  </button>
+  <button class="csv-btn"  >
+    <a routerLink="/add-task">Add Task</a>
+  </button>
 </div>
 
 <div class="task-list">
@@ -31,8 +38,21 @@
       <p class="task-due-date"><strong>Due Date:</strong> {{ task.dueDate | date }}</p>
       <p class="task-priority"><strong>Priority:</strong> {{ task.priority }}</p>
       <p class="task-status"><strong>Status:</strong> {{ task.status }}</p>
-      <button class="edit-btn" (click)="editTask(task._id)">History & Edit</button>
-      <button class="delete-btn" (click)="deleteTask(task._id)">Delete</button>
+      <button class="edit-btn" (click)="editTask(task._id)">
+        <i class="fas fa-edit"></i> 
+      </button>
+      
+      <!-- Delete button -->
+      <button class="delete-btn" (click)="deleteTask(task._id)">
+        <i class="fas fa-trash"></i> 
+      </button>
+      
+      <!-- History log button -->
+      <button class="edit-btn" (click)="editTask(task._id)">
+        <i class="fas fa-history"></i> 
+      </button>
     </div>
   </div>
+</div>
+</div>
 </div>

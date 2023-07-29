@@ -3,8 +3,11 @@ import { Router } from '@angular/router';
 import { Task } from '../task.model';
 import { TaskService } from '../task.service';
 import { saveAs } from 'file-saver';
-
 import * as Papa from 'papaparse';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../store/app.state';
+import { loadTasks, deleteTask } from '../store/task.actions';
+import { selectAllTasks } from '../store/task.reducer';
 
 @Component({
   selector: 'app-task-list',
@@ -17,22 +20,30 @@ export class TaskListComponent implements OnInit {
   sortByPriorityAscending = true; // Flag for sorting priority in ascending order
   sortByStatusAscending = true; // Flag for sorting status in ascending order
 
-  constructor(private router: Router, private taskService: TaskService) {}
+  constructor(
+    private router: Router,
+    private taskService: TaskService,
+    private store: Store<AppState>
+  ) {}
 
   ngOnInit(): void {
     this.getTasks();
+    this.store.pipe(select(selectAllTasks)).subscribe((tasks) => {
+      this.tasks = tasks;
+      console.log(tasks);
+    });
+    
   }
 
   getTasks(): void {
     this.taskService.getTasks().subscribe((tasks) => {
-      this.tasks = tasks;
-      console.log(tasks);
+      this.store.dispatch(loadTasks({ tasks }));
     });
   }
 
   sortByDueDate(): void {
     this.sortByDueDateAscending = !this.sortByDueDateAscending;
-    this.tasks.sort((a, b) => {
+    const sortedTasks = [...this.tasks].sort((a, b) => {
       const order = this.sortByDueDateAscending ? 1 : -1;
       return (
         order *
@@ -40,24 +51,27 @@ export class TaskListComponent implements OnInit {
           (b.dueDate ? new Date(b.dueDate).getTime() : 0))
       );
     });
+    this.tasks = sortedTasks;
   }
 
   sortByPriority(): void {
     this.sortByPriorityAscending = !this.sortByPriorityAscending;
-    const priorityOrder: { [key: string]: number } = { low: 0, medium: 1, high: 2 };
-    this.tasks.sort((a, b) => {
+    const priorityOrder: { [key: string]: number } = { 'Low': 0, 'Medium': 1, 'High': 2 };
+    const sortedTasks = [...this.tasks].sort((a, b) => {
       const order = this.sortByPriorityAscending ? 1 : -1;
       return order * (priorityOrder[a.priority] - priorityOrder[b.priority]);
     });
+    this.tasks = sortedTasks;
   }
 
   sortByStatus(): void {
     this.sortByStatusAscending = !this.sortByStatusAscending;
-    const statusOrder: { [key: string]: number } = { 'to-do': 0, 'in-progress': 1, completed: 2 };
-    this.tasks.sort((a, b) => {
+    const statusOrder: { [key: string]: number } = { 'To-do': 0, 'In-progress': 1, 'Completed': 2 };
+    const sortedTasks = [...this.tasks].sort((a, b) => {
       const order = this.sortByStatusAscending ? 1 : -1;
       return order * (statusOrder[a.status] - statusOrder[b.status]);
     });
+    this.tasks = sortedTasks;
   }
 
   editTask(id: string): void {
@@ -73,7 +87,7 @@ export class TaskListComponent implements OnInit {
     this.taskService.deleteTask(taskId).subscribe(
       () => {
         console.log('Task deleted successfully!');
-        this.getTasks();
+        this.store.dispatch(deleteTask({ taskId }));
       },
       (error) => {
         console.error('Error deleting task:', error);
@@ -81,17 +95,16 @@ export class TaskListComponent implements OnInit {
     );
   }
 
- exportToCSV(): void {
-  // Clone the tasks array to avoid modifying the original data
-  const tasksWithClearProperty = this.tasks.map((task) => ({ ...task, clear: '' }));
+  exportToCSV(): void {
+    // Clone the tasks array to avoid modifying the original data
+    const tasksWithClearProperty = this.tasks.map((task) => ({ ...task, clear: '' }));
 
-  const csvData = Papa.unparse(tasksWithClearProperty, {
-    quotes: true,
-    delimiter: ',',
-  });
+    const csvData = Papa.unparse(tasksWithClearProperty, {
+      quotes: true,
+      delimiter: ',',
+    });
 
-  const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' });
-  saveAs(blob, 'tasks.csv');
-}
-
+    const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8' });
+    saveAs(blob, 'tasks.csv');
+  }
 }

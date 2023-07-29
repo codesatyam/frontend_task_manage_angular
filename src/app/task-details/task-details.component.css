@@ -2,11 +2,16 @@
 .tasks-det {
   margin: 20px;
 }
-
+.update-task{
+  background-color: rgb(210, 202, 191);
+  border-radius: 10px;
+  text-align: center;
+  padding: 5px;
+}
 div[ngIf="task"] {
   margin: 20px;
   padding: 20px;
-  background-color: #f8f8f8;
+  background-color: #bcb8b8;
 }
 
 /* Style the form elements */
@@ -16,7 +21,8 @@ form {
   grid-gap: 16px;
   margin-bottom: 20px;
   background-color: #e7dcdc;
-  padding: 12px;
+  padding: 20px;
+  padding-bottom: 50px;
 }
 
 label {
@@ -49,7 +55,7 @@ select {
 
 /* Style the buttons */
 button {
-  padding: 8px 20px; /* Adjust button padding */
+  padding: 8px 20px;  
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -103,4 +109,35 @@ li {
   color: #0056b3; /* Blue color for current task properties */
 }
 
-/* Add other CSS styles for remaining classes */
+/* Responsive styles for larger screens */
+@media (max-width: 768px) {
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;  
+    grid-gap: 20px;
+  }
+  .update-task {
+    grid-column: span 2; /* Span both columns on larger screens */
+  }
+}
+
+/* Responsive styles for medium-sized screens */
+@media (max-width: 767px) {
+  form {
+    grid-template-columns: 1fr;  
+  }
+  .update-task {
+    grid-column: auto;  
+  }
+}
+
+/* Responsive styles for small or mobile screens */
+@media (max-width: 680px) {
+  form {
+    grid-template-columns: 1fr; /* Single column on small or mobile screens */
+  }
+  .history-log {
+    justify-content: center;
+    flex-direction: column; /* Display history log in column layout on small or mobile screens */
+  }
+}

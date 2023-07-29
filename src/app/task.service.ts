@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Task, TaskHistory, TaskChanges } from './task.model';
+import { Task } from '../app/task.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private backendUrl = 'http://localhost:5000/api/tasks'; // Replace 'your_backend_url_here' with the actual backend URL.
+  private backendUrl = 'https://task-backend-s9af.onrender.com/api/tasks'; 
 
   constructor(private http: HttpClient) { }
 
@@ -28,9 +28,6 @@ export class TaskService {
   }
 
   updateTask(task: Task): Observable<Task> {
-    // Call the updateTask API endpoint on the backend to save the changes
     return this.http.put<Task>(`${this.backendUrl}/${task._id}`, task);
   }
-  
 }
-

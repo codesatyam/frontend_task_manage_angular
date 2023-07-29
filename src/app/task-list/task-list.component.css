@@ -1,3 +1,26 @@
+
+@media (max-width: 767px) {
+  /* Set .tasks-list width to less on mobile devices */
+  .tasks-list {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
+
+/* Keep the existing styles for larger screens */
+.tasks-list{
+  /* display: flex;
+  justify-content: center; */
+  /* width: 70%; */
+   
+  
+  background-color: #f8f8f8;
+}
+.tasks-list div{
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 3px;
+}
 /* Style the container */
 .task-list-container {
   margin: 20px;
@@ -9,7 +32,7 @@
 h2 {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 16px;
+  margin-bottom: 5px;
 }
 
 /* Style each task item */
@@ -63,6 +86,7 @@ button.delete-btn {
   color: #fff;
   cursor: pointer;
   font-size: 16px;
+  /* min-width: 200px; */
 }
 
 button.edit-btn {
@@ -73,9 +97,18 @@ button.edit-btn {
 button.delete-btn {
   background-color: #dc3545; /* Delete button color */
 }
+/* Styles for the anchor tag */
+.tasks-list .csv-btn a {
+  text-decoration: none;
+  margin-left: 0;
+  color: #ffffff; /* White text color */
+  /* background-color: #4caf50;   */
+  /* Add any other attractive styles you want */
+}
+
 /* Styles for the sorting buttons */
 .sort-button {
-  margin: 0 5px;
+   
   cursor: pointer;
   padding: 5px 10px;
   border: 1px solid #ccc;
@@ -133,12 +166,22 @@ button.delete-btn {
   color: #fff;
   border: none;
   border-radius: 3px;
-  padding: 5px 10px;
+  padding: 8px 10px;
   margin-right: 5px;
+  margin-bottom: 4px;
 }
 
 .edit-btn:hover,
 .delete-btn:hover {
   background-color: #0056b3;
+}
+
+.list-btn{
+  /* border:2px solid #dc3545; */
+  max-height: 60px;
+}
+.csv-btn{
+  margin-top: 3px;
+  margin-bottom: 1px;
 }
 

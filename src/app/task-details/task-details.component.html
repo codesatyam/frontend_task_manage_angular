@@ -1,59 +1,73 @@
-<div *ngIf="task" class="tasks-det">
-  <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
-    <div>
-      <label for="title">Title:</label>
-      <input type="text" id="title" name="title" [(ngModel)]="updatedTask.title" required>
+<div class="container">
+  <div *ngIf="task" class="tasks-det">
+    <div class="update-task"> 
+      <!-- Task Update Form -->
+      <h4>Update task</h4>
+      <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
+        <!-- Title Input -->
+        <div>
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title" [(ngModel)]="updatedTask.title" required>
+        </div>
+        <!-- Description Textarea -->
+        <div>
+          <label for="description">Description:</label>
+          <textarea id="description" name="description" [(ngModel)]="updatedTask.description" required></textarea>
+        </div>
+        <!-- Due Date Input -->
+        <div>
+          <label for="dueDate">Due Date:</label>
+          <input type="date" id="dueDate" name="dueDate" [(ngModel)]="updatedTask.dueDate" required>
+        </div>
+        <!-- Priority Dropdown -->
+        <div>
+          <label for="priority">Priority:</label>
+          <select id="priority" name="priority" [(ngModel)]="updatedTask.priority" required>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </div>
+        <!-- Status Dropdown -->
+        <div>
+          <label for="status">Status:</label>
+          <select id="status" name="status" [(ngModel)]="updatedTask.status" required>
+            <option value="To-do">To Do</option>
+            <option value="In-progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
+        <!-- Save and Reset Buttons -->
+        <div class="button-container">
+          <button type="submit">Save Changes</button>
+          <button type="button" (click)="resetForm()">Reset Form</button>
+        </div>    
+      </form>
     </div>
-    <div>
-      <label for="description">Description:</label>
-      <textarea id="description" name="description" [(ngModel)]="updatedTask.description" required></textarea>
-    </div>
-    <div>
-      <label for="dueDate">Due Date:</label>
-      <input type="date" id="dueDate" name="dueDate" [(ngModel)]="updatedTask.dueDate" required>
-    </div>
-    <div>
-      <label for="priority">Priority:</label>
-      <select id="priority" name="priority" [(ngModel)]="updatedTask.priority" required>
-        <option value="low">Low</option>
-        <option value="medium">Medium</option>
-        <option value="high">High</option>
-      </select>
-    </div>
-    <div>
-      <label for="status">Status:</label>
-      <select id="status" name="status" [(ngModel)]="updatedTask.status" required>
-        <option value="to-do">To Do</option>
-        <option value="in-progress">In Progress</option>
-        <option value="completed">Completed</option>
-      </select>
-    </div>
-    <div class="button-container">
-      <button type="submit">Save Changes</button>
-      <button type="button" (click)="resetForm()">Reset Form</button>
-    </div>    
-  </form>
-  <h3>History Log</h3>
-  <ul>
-    <li *ngFor="let historyEntry of task.historyLog">
-      <p>Time: {{ historyEntry.timestamp | date }}</p>
-      <div class="d-flex history-log">
-        <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'title')}">
-          <strong>Title:</strong> {{ getPropertyValue(historyEntry.changes, 'title', task.title) }}
-        </span>
-        <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'description')}">
-          <strong>desc:</strong> {{ getPropertyValue(historyEntry.changes, 'description', task.description) }}
-        </span>
-        <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'dueDate')}">
-          <strong>Due Date:</strong> {{ getPropertyValue(historyEntry.changes, 'dueDate', task.dueDate) }}
-        </span>
-        <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'priority')}">
-          <strong>Priority:</strong> {{ getPropertyValue(historyEntry.changes, 'priority', task.priority) }}
-        </span>
-        <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'status')}">
-          <strong>Status:</strong> {{ getPropertyValue(historyEntry.changes, 'status', task.status) }}
-        </span>
-      </div>
-    </li>
-  </ul>
+    <!-- History Log -->
+    <h3>History Log</h3>
+    <ul>
+      <li *ngFor="let historyEntry of task.historyLog">
+        <p>Time: {{ historyEntry.timestamp | date }}</p>
+        <div class="d-flex history-log">
+          <!-- Display Changes in History Log -->
+          <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'title')}">
+            <strong>Title:</strong> {{ getPropertyValue(historyEntry.changes, 'title', task.title) }}
+          </span>
+          <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'description')}">
+            <strong>desc:</strong> {{ getPropertyValue(historyEntry.changes, 'description', task.description) }}
+          </span>
+          <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'dueDate')}">
+            <strong>Due Date:</strong> {{ getPropertyValue(historyEntry.changes, 'dueDate', task.dueDate) }}
+          </span>
+          <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'priority')}">
+            <strong>Priority:</strong> {{ getPropertyValue(historyEntry.changes, 'priority', task.priority) }}
+          </span>
+          <span class="mx-4" [ngClass]="{'current-property': isCurrentProperty(historyEntry.changes, 'status')}">
+            <strong>Status:</strong> {{ getPropertyValue(historyEntry.changes, 'status', task.status) }}
+          </span>
+        </div>
+      </li>
+    </ul>
+  </div>
 </div>

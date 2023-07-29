@@ -16,8 +16,8 @@ export class TaskDetailsComponent implements OnInit {
     title: '',
     description: '',
     dueDate: new Date(),
-    priority: 'low',
-    status: 'to-do',
+    priority: 'Low',
+    status: 'To-do',
     historyLog: []
   };
   taskChanges: TaskChanges = {};
@@ -50,11 +50,8 @@ export class TaskDetailsComponent implements OnInit {
         changes: this.taskChanges
       };
 
-      if (!this.task.historyLog) {
-        this.task.historyLog = [];
-      }
       this.task.historyLog.unshift(historyEntry);
-
+       console.log("dis-befre")
       this.taskService.updateTask(this.task).subscribe(
         () => {
           console.log('Task updated successfully!');
@@ -67,7 +64,7 @@ export class TaskDetailsComponent implements OnInit {
       console.log('No changes to save.');
     }
   }
-
+// comapring changes in task
   compareAndUpdateChanges(): void {
     this.taskChanges = {};
 
@@ -97,14 +94,15 @@ export class TaskDetailsComponent implements OnInit {
     this.updatedTask = { ...this.task };
     this.compareAndUpdateChanges();
   }
+   // Check if the property exists in the changes object
   isCurrentProperty(changes: any, property: string): boolean {
-    // Check if the property exists in the changes object
+    
     return changes && changes[property] !== undefined;
   }
-
-  getPropertyValue(changes: any, property: string, defaultValue: any): any {
-    // If property exists in the changes object, return its value
+ // If property exists in the changes object, return its value
     // Otherwise, return the default value from the current task
+  getPropertyValue(changes: any, property: string, defaultValue: any): any {
+    
     return changes && changes[property] !== undefined
       ? changes[property]
       : defaultValue;

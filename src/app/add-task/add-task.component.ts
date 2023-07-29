@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TaskService } from '../task.service';
+import { Store } from '@ngrx/store';
+import { AppState } from '../store/app.state';
+import { addTask } from '../store/task.actions';
 
 @Component({
   selector: 'app-add-task',
@@ -10,15 +13,15 @@ import { TaskService } from '../task.service';
 export class AddTaskComponent implements OnInit {
   newTaskForm!: FormGroup; // Add the '!' here
 
-  constructor(private formBuilder: FormBuilder, private taskService: TaskService) { }
+  constructor(private formBuilder: FormBuilder, private taskService: TaskService, private store: Store<AppState>) { }
 
   ngOnInit(): void {
     this.newTaskForm = this.formBuilder.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       dueDate: ['', Validators.required],
-      priority: ['low', Validators.required],
-      status: ['to-do', Validators.required]
+      priority: ['Low', Validators.required],
+      status: ['To-do', Validators.required]
     });
   }
 
@@ -26,6 +29,7 @@ export class AddTaskComponent implements OnInit {
     const newTask = this.newTaskForm.value;
     this.taskService.addTask(newTask).subscribe(
       () => {
+        this.store.dispatch(addTask(newTask ));
         this.newTaskForm.reset();
         console.log('Task added successfully!');
       },
@@ -33,6 +37,9 @@ export class AddTaskComponent implements OnInit {
         console.error('Error adding task:', error);
       }
     );
+     
+   
+ 
   }
   
 }
